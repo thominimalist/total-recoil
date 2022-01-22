@@ -4,11 +4,16 @@ import Select from "../atoms/Select";
 import {cardsNumberOptions, colorsOptions} from "./data.form";
 import {Card, Color} from "../../models/Card";
 
+import {useSetRecoilState} from "recoil";
+import {deckState} from "../../state/CardState";
+
 const CardForm = () => {
     const [card, setCard] = useState<Card>({value: 1, color: 'hearts'});
 
-    const addCard = () => {
+    const updateDeck = useSetRecoilState(deckState);
 
+    const addCard = () => {
+        updateDeck(deck => [...deck, card]);
     }
 
     const setValue = (value: string) => {

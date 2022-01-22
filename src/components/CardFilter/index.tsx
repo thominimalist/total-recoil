@@ -1,18 +1,20 @@
 import Select from "../atoms/Select";
 import {filtersOptions} from "./data.filter";
-import React, {useState} from "react";
+import React from "react";
 import {CardFilter} from "../../models/Card";
 
+import {useRecoilState, useResetRecoilState} from "recoil";
+import {deckState, selectedFilterState} from "../../state/CardState";
+
+
 const CardFilterComponent = () => {
-    const [selectedFilter, setSelectedFilter] = useState<CardFilter>(CardFilter.ALL);
+    const [selectedFilter, setSelectedFilter] = useRecoilState(selectedFilterState);
 
     const updateSelectedFilter = (value: string) => {
         setSelectedFilter(value as CardFilter);
     }
 
-    const resetDeck = () => {
-
-    }
+    const resetDeck = useResetRecoilState(deckState);
 
     return <div className="fixed bg-white w-full flex p-4 content-center space-x-8 rounded-b-lg top-0">
         <span className="my-auto">Afficher : </span>
